@@ -18,6 +18,9 @@ class TextsGameLovers {
 
   static const defaultLoadingMessage = 'Carregando...';
 
-  static const name = 'Nome: ';
   static const description = 'Descrição: ';
+  static const platform = 'Pataformas: ';
+  static const genres = 'Gêneros: ';
+
+  static const undefined = 'Não definido';
 }

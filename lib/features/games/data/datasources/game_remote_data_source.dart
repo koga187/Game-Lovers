@@ -35,7 +35,7 @@ class GameRemoteDataSourceImpl implements GameRemoteDataSource {
           // 'Access-Control-Allow-Origin': '*',
         }),
         data: '''
-              fields id, name, platforms, summary, screenshots.url;
+              fields id, name, platforms, summary, screenshots.url, genres.name, platforms.name;
               where platforms = $idPlatform;
               limit $limit;
               offset $offset;
