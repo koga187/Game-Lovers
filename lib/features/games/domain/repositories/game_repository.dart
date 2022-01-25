@@ -8,6 +8,4 @@ abstract class GameRepository {
     required int offset,
     required int idPlatform,
   });
-
-  Future<Either<Failure, String>> urlScreenshot({required int idScreenshots});
 }

@@ -16,7 +16,10 @@ dependencies:
   equatable: ^2.0.3
   flutter_bloc: ^8.0.1
   google_fonts: ^2.2.0
+  oktoast: ^3.1.5
+  provider: ^6.0.2
   responsive_framework: ^0.1.5
+  sqflite: ^2.0.2
 
   cupertino_icons: ^1.0.2
 

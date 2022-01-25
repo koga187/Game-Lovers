@@ -5,13 +5,12 @@ class GameModel extends Game {
     required int id,
     required String name,
     required String description,
-    required int imageId,
-    required int idPlatform
+    required String imageUrl,
   }) : super(
           id: id,
           name: name,
           description: description,
-          imageId: imageId,
+          imageUrl: imageUrl,
         );
 
   factory GameModel.fromJson(Map<String, dynamic> json) {
@@ -19,11 +18,20 @@ class GameModel extends Game {
       id: json['id'],
       name: json['name'],
       description: json['summary'],
-      idPlatform: json['platforms'],
-      imageId: (json['screenshots'] as List<int>).first,
-   
+      imageUrl: getImageUrl(json['screenshots'] as List<dynamic>),
     );
   }
+}
 
-
+String getImageUrl(List<dynamic> list) {
+  try {
+    if (list.isNotEmpty) {
+      final url = list.first['url'];
+      return url;
+    } else {
+      return '';
+    }
+  } catch (e) {
+    return '';
   }
+}

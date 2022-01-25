@@ -1,8 +1,6 @@
 class TextsGameLovers {
   TextsGameLovers._();
 
-  static const baseUrl = 'https://api.igdb.com/v4/games';
-
   static const gameLovers = 'Game Lovers App';
 
   //Plataformas
@@ -17,4 +15,9 @@ class TextsGameLovers {
   static const unexpectedFailureMsg = 'Unexpected Error';
   static const cacheFailureMsg = 'Falha de Cacheamento';
   static const tooManyRequests = 'Excesso de solicitações ao servidor';
+
+  static const defaultLoadingMessage = 'Carregando...';
+
+  static const name = 'Nome: ';
+  static const description = 'Descrição: ';
 }

@@ -8,4 +8,7 @@ class ColorsGameLovers {
   static const yellowLight = Color(0xFFfefadb);
   static const pinkLight = Color(0xFFfedbf1);
   static const pink = Color(0xFFfd4eba);
+  static const blue = Color(0xFF4e63fd);
+  static const greyLight = Color(0xFFeeeeee);
+  static const red = Color(0xFFbf360c);
 }

@@ -16,9 +16,9 @@ class StylesGameLovers {
     fontWeight: FontWeight.w500,
   );
 
-  static final TextStyle bodyBlackDesktop = GoogleFonts.ptSansNarrow(
-    color: ColorsGameLovers.black,
+  static final TextStyle bodyBlue = GoogleFonts.ptSansNarrow(
+    color: ColorsGameLovers.blue,
     fontSize: 16,
-    fontWeight: FontWeight.w500,
+    fontWeight: FontWeight.w600,
   );
 }

@@ -12,7 +12,7 @@ class ServerFailure extends Failure {}
 
 class CacheFailure extends Failure {}
 
-class TooManyRequestsFailre extends Failure {}
+class TooManyRequestsFailure extends Failure {}
 
 String mapFailureToMessage(Failure failure) {
   switch (failure.runtimeType) {
@@ -20,7 +20,7 @@ String mapFailureToMessage(Failure failure) {
       return TextsGameLovers.serveFailure;
     case CacheFailure:
       return TextsGameLovers.cacheFailureMsg;
-    case TooManyRequestsFailre:
+    case TooManyRequestsFailure:
       return TextsGameLovers.tooManyRequests;
     default:
       return TextsGameLovers.unexpectedFailureMsg;

@@ -1,4 +1,5 @@
 import 'package:dio/dio.dart';
+import 'package:flutter/foundation.dart';
 import 'package:game_lovers_app/core/config/api_config.dart';
 import 'package:game_lovers_app/core/error/exceptions.dart';
 import 'package:game_lovers_app/features/games/data/model/game_model.dart';
@@ -28,11 +29,13 @@ class GameRemoteDataSourceImpl implements GameRemoteDataSource {
       final response = await httpClient.post(
         baseUrl + 'games',
         options: Options(headers: <String, String>{
-          'authorization': 'Bearer' + token,
-          'Client-ID': clientID
+          'authorization': 'Bearer ' + token,
+          'Client-ID': clientID,
+          // 'Content-Type': 'text/plain',
+          // 'Access-Control-Allow-Origin': '*',
         }),
         data: '''
-              fields name, platforms, summary, screenshots;
+              fields id, name, platforms, summary, screenshots.url;
               where platforms = $idPlatform;
               limit $limit;
               offset $offset;
@@ -40,7 +43,7 @@ class GameRemoteDataSourceImpl implements GameRemoteDataSource {
       );
 
       final data = response.data as List<dynamic>;
-
+      debugPrint('${data.first}');
       return data
           .map<GameModel>(
               (map) => GameModel.fromJson(map as Map<String, dynamic>))
@@ -50,8 +53,12 @@ class GameRemoteDataSourceImpl implements GameRemoteDataSource {
         throw TooManyRequestsException();
       }
 
+      debugPrint('Error => $e');
+
       throw ServerException();
     } catch (e) {
+      debugPrint('Error => $e');
+
       throw ServerException();
     }
   }
