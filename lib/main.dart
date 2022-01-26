@@ -1,6 +1,7 @@
 import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:game_lovers_app/core/config/api_config.dart';
 import 'package:game_lovers_app/core/theme/bloc/theme_bloc.dart';
 import 'package:game_lovers_app/features/games/data/datasources/game_remote_data_source.dart';
 import 'package:game_lovers_app/features/games/domain/repositories/game_repository.dart';
@@ -17,7 +18,14 @@ import 'features/games/data/repositories/game_repository_impl.dart';
 void main() {
   runApp(MultiProvider(providers: [
     Provider(
-      create: (context) => Dio(),
+      create: (context) => Dio(
+        BaseOptions(
+          headers: <String, String>{
+            'authorization': 'Bearer ' + token,
+            'Client-ID': clientID,
+          },
+        ),
+      ),
     ),
     Provider<GameRemoteDataSource>(
       create: (context) => GameRemoteDataSourceImpl(

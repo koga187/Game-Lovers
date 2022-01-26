@@ -77,87 +77,33 @@ class _HomeGridViewState extends State<HomeGridView> {
                             )),
                         child: Container(
                           width: sizeWidth * .1,
-                          child: Column(
-                            mainAxisAlignment: MainAxisAlignment.start,
-                            crossAxisAlignment: CrossAxisAlignment.start,
+                          height: sizeWidth * .1,
+                          child: Stack(
                             children: [
-                              // sizeWidth > 400
-                              //     ? Row(
-                              //         mainAxisAlignment:
-                              //             MainAxisAlignment.spaceAround,
-                              //         children: [
-                              //           Text(
-                              //             _games[index].name,
-                              //             style: StylesGameLovers.bodyBlue,
-                              //           ),
-                              //           Container(
-                              //             width: sizeWidth * .1,
-                              //             height: sizeHeight * .1,
-                              //             decoration: const BoxDecoration(
-                              //               borderRadius: BorderRadius.all(
-                              //                 Radius.circular(5),
-                              //               ),
-                              //             ),
-                              //             child: Image.network(
-                              //               baseHttp + _games[index].imageUrl!,
-                              //               errorBuilder: (BuildContext context,
-                              //                   Object exception,
-                              //                   StackTrace? stackTrace) {
-                              //                 return Image.asset(
-                              //                     ImagesGameLovers.imageGeral);
-                              //               },
-                              //             ),
-                              //           ),
-                              //         ],
-                              //       )
-                              //     :
+                              Image.network(
+                                baseHttp + _games[index].imageUrl!,
+                                errorBuilder: (BuildContext context,
+                                    Object exception, StackTrace? stackTrace) {
+                                  return Image.asset(
+                                    ImagesGameLovers.imageGeral,
+                                    fit: BoxFit.fill,
+                                    width: MediaQuery.of(context).size.width,
+                                  );
+                                },
+                                fit: BoxFit.fill,
+                                height: sizeHeight,
+                              ),
                               Column(
+                                mainAxisAlignment: MainAxisAlignment.end,
                                 children: [
-                                  Container(
-                                    height:
-                                        // sizeWidth < 400
-                                        //     ? sizeWidth * .5
-                                        // :
-                                        sizeWidth * .1,
-                                    decoration: const BoxDecoration(
-                                      borderRadius: BorderRadius.all(
-                                        Radius.circular(5),
-                                      ),
-                                    ),
-                                    child: Image.network(
-                                      baseHttp + _games[index].imageUrl!,
-                                      errorBuilder: (BuildContext context,
-                                          Object exception,
-                                          StackTrace? stackTrace) {
-                                        return Image.asset(
-                                            ImagesGameLovers.imageGeral);
-                                      },
-                                      fit: BoxFit.fill,
-                                    ),
-                                  ),
                                   SizedBox(
                                     height: sizeWidth * .1,
                                   ),
-                                  // Row(
-                                  //   mainAxisAlignment:
-                                  //       MainAxisAlignment.spaceBetween,
-                                  //   children: [
-                                  //     Padding(
-                                  //       padding: const EdgeInsets.only(
-                                  //           left: 20, top: 20),
-                                  //       child: InkWell(
-                                  //         onTap: () => push(
-                                  //             context,
-                                  //             GamePage(
-                                  //               game: _games[index],
-                                  //             )),
-                                  //         child: const Icon(
-                                  //           Icons.east_outlined,
-                                  //           color: ColorsGameLovers.pink,
-                                  //         ),
-                                  //       ),
-                                  //     ),
-                                  Padding(
+
+                                  Container(
+                                    width: sizeWidth,
+                                    color:
+                                        ColorsGameLovers.white.withOpacity(.7),
                                     padding: const EdgeInsets.all(12),
                                     child: Text(
                                       _games[index].name,
@@ -171,33 +117,19 @@ class _HomeGridViewState extends State<HomeGridView> {
                               ),
                             ],
                           ),
-                          decoration: BoxDecoration(
-                              borderRadius: const BorderRadius.all(
-                                Radius.circular(10),
-                              ),
-                              boxShadow: const [
-                                BoxShadow(
-                                    blurRadius: 5,
-                                    color: ColorsGameLovers.greyLight,
-                                    offset: Offset(1, 2))
-                              ],
-                              color:
-                                  ColorsGameLovers.yellowLight.withOpacity(.5)
-                              // gradient: LinearGradient(
-                              //   begin: Alignment.bottomRight,
-                              //   end: Alignment.topLeft,
-                              //   colors: [
-                              //     ColorsGameLovers.yellowLight.withOpacity(.8),
-                              //     ColorsGameLovers.pinkLight.withOpacity(.8),
-                              //   ],
-                              // ),
-                              ),
+                          decoration: const BoxDecoration(
+                            borderRadius: BorderRadius.all(
+                              Radius.circular(10),
+                            ),
+                            boxShadow: [
+                              BoxShadow(
+                                  blurRadius: 5,
+                                  color: ColorsGameLovers.greyLight,
+                                  offset: Offset(1, 2))
+                            ],
+                          ),
                         ),
                       );
-                      // Card(
-                      //   color: Colors.amber,
-                      //   child: Center(child: Text('$index')),
-                      // );
                     }),
                 SizedBox(
                   height: sizeHeight * .05,
@@ -233,11 +165,7 @@ class _HomeGridViewState extends State<HomeGridView> {
       return 4;
     } else if (sizeWindow < 800 && sizeWindow >= 600) {
       return 3;
-    }
-    // else if (sizeWindow <= 600 && sizeWindow >= 400) {
-    //   return 2;
-    // }
-    else {
+    } else {
       return 2;
     }
   }

@@ -28,12 +28,6 @@ class GameRemoteDataSourceImpl implements GameRemoteDataSource {
     try {
       final response = await httpClient.post(
         baseUrl + 'games',
-        options: Options(headers: <String, String>{
-          'authorization': 'Bearer ' + token,
-          'Client-ID': clientID,
-          // 'Content-Type': 'text/plain',
-          // 'Access-Control-Allow-Origin': '*',
-        }),
         data: '''
               fields id, name, platforms, summary, screenshots.url, genres.name, platforms.name;
               where platforms = $idPlatform;
@@ -43,7 +37,6 @@ class GameRemoteDataSourceImpl implements GameRemoteDataSource {
       );
 
       final data = response.data as List<dynamic>;
-      debugPrint('${data.first}');
       return data
           .map<GameModel>(
               (map) => GameModel.fromJson(map as Map<String, dynamic>))

@@ -13,7 +13,7 @@ class Game extends Equatable {
   final int id;
   final String name;
   final String? imageUrl;
-  final String description;
+  final String? description;
   final List<String?>? genres;
   final List<String?> platform;
 

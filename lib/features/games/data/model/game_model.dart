@@ -4,7 +4,7 @@ class GameModel extends Game {
   const GameModel(
       {required int id,
       required String name,
-      required String description,
+      required String? description,
       required String imageUrl,
       required List<String?>? genres,
       required List<String?> platforms})
@@ -21,7 +21,7 @@ class GameModel extends Game {
     return GameModel(
       id: json['id'],
       name: json['name'] ?? '',
-      description: json['summary'] ?? '',
+      description: json['summary'],
       imageUrl: json['screenshots'] != null
           ? getImageUrl(json['screenshots'] as List<dynamic>)
           : '',
