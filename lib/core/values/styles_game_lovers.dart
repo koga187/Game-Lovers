@@ -1,8 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:game_lovers_app/core/values/colors_game_lovers.dart';
 import 'package:google_fonts/google_fonts.dart';
-import 'package:responsive_framework/responsive_framework.dart';
-import 'package:responsive_framework/responsive_value.dart';
 
 class StylesGameLovers {
   static final TextStyle titleAppBar = GoogleFonts.ptSansNarrow(

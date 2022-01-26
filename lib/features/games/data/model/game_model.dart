@@ -20,9 +20,11 @@ class GameModel extends Game {
   factory GameModel.fromJson(Map<String, dynamic> json) {
     return GameModel(
       id: json['id'],
-      name: json['name'],
-      description: json['summary'],
-      imageUrl: getImageUrl(json['screenshots'] as List<dynamic>),
+      name: json['name'] ?? '',
+      description: json['summary'] ?? '',
+      imageUrl: json['screenshots'] != null
+          ? getImageUrl(json['screenshots'] as List<dynamic>)
+          : '',
       genres: json['genres'] != null
           ? getLists(json['genres'] as List<dynamic>)
           : null,

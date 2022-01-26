@@ -13,21 +13,22 @@ import 'package:game_lovers_app/features/games/presentation/pages/game_page.dart
 import 'package:game_lovers_app/features/home/presentation/bloc/home_page_bloc.dart';
 
 class HomeGridView extends StatefulWidget {
-  const HomeGridView({Key? key, required this.homePageBloc}) : super(key: key);
+  const HomeGridView(
+      {Key? key, required this.homePageBloc, required this.idPlatform})
+      : super(key: key);
 
   final HomePageBloc homePageBloc;
-
+  final int idPlatform;
   @override
   _HomeGridViewState createState() => _HomeGridViewState();
 }
 
 class _HomeGridViewState extends State<HomeGridView> {
+  final _games = <Game>[];
   @override
   Widget build(BuildContext context) {
     final double sizeWidth = MediaQuery.of(context).size.width;
     final double sizeHeight = MediaQuery.of(context).size.height;
-
-    final _games = <Game>[];
 
     return BlocConsumer(
       listener: (context, state) {
@@ -53,147 +54,176 @@ class _HomeGridViewState extends State<HomeGridView> {
       builder: (context, state) {
         if (state is Loaded) {
           _games.addAll(state.list);
-
-          return Padding(
-            padding: const EdgeInsets.all(12),
-            child: GridView.builder(
-                gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
-                    crossAxisCount: checkSize(sizeWidth),
-                    crossAxisSpacing: sizeWidth * .02,
-                    mainAxisSpacing: sizeWidth * .02),
-                itemCount: 300,
-                itemBuilder: (BuildContext context, int index) {
-                  return InkWell(
-                    onTap: () => push(
-                        context,
-                        GamePage(
-                          game: _games[index],
-                        )),
-                    child: Container(
-                      width: sizeWidth * .1,
-                      child: Column(
-                        mainAxisAlignment: MainAxisAlignment.start,
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        children: [
-                          // sizeWidth > 400
-                          //     ? Row(
-                          //         mainAxisAlignment:
-                          //             MainAxisAlignment.spaceAround,
-                          //         children: [
-                          //           Text(
-                          //             _games[index].name,
-                          //             style: StylesGameLovers.bodyBlue,
-                          //           ),
-                          //           Container(
-                          //             width: sizeWidth * .1,
-                          //             height: sizeHeight * .1,
-                          //             decoration: const BoxDecoration(
-                          //               borderRadius: BorderRadius.all(
-                          //                 Radius.circular(5),
-                          //               ),
-                          //             ),
-                          //             child: Image.network(
-                          //               baseHttp + _games[index].imageUrl!,
-                          //               errorBuilder: (BuildContext context,
-                          //                   Object exception,
-                          //                   StackTrace? stackTrace) {
-                          //                 return Image.asset(
-                          //                     ImagesGameLovers.imageGeral);
-                          //               },
-                          //             ),
-                          //           ),
-                          //         ],
-                          //       )
-                          //     :
-                          Column(
+        }
+        return Padding(
+          padding: const EdgeInsets.all(10),
+          child: SingleChildScrollView(
+            child: Column(
+              children: [
+                GridView.builder(
+                    physics: const NeverScrollableScrollPhysics(),
+                    shrinkWrap: true,
+                    gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+                        crossAxisCount: checkSize(sizeWidth),
+                        crossAxisSpacing: sizeWidth * .02,
+                        mainAxisSpacing: sizeWidth * .02),
+                    itemCount: _games.length,
+                    itemBuilder: (BuildContext context, int index) {
+                      return InkWell(
+                        onTap: () => push(
+                            context,
+                            GamePage(
+                              game: _games[index],
+                            )),
+                        child: Container(
+                          width: sizeWidth * .1,
+                          child: Column(
+                            mainAxisAlignment: MainAxisAlignment.start,
+                            crossAxisAlignment: CrossAxisAlignment.start,
                             children: [
-                              Container(
-                                height:
-                                    // sizeWidth < 400
-                                    //     ? sizeWidth * .5
-                                    // :
-                                    sizeWidth * .1,
-                                decoration: const BoxDecoration(
-                                  borderRadius: BorderRadius.all(
-                                    Radius.circular(5),
+                              // sizeWidth > 400
+                              //     ? Row(
+                              //         mainAxisAlignment:
+                              //             MainAxisAlignment.spaceAround,
+                              //         children: [
+                              //           Text(
+                              //             _games[index].name,
+                              //             style: StylesGameLovers.bodyBlue,
+                              //           ),
+                              //           Container(
+                              //             width: sizeWidth * .1,
+                              //             height: sizeHeight * .1,
+                              //             decoration: const BoxDecoration(
+                              //               borderRadius: BorderRadius.all(
+                              //                 Radius.circular(5),
+                              //               ),
+                              //             ),
+                              //             child: Image.network(
+                              //               baseHttp + _games[index].imageUrl!,
+                              //               errorBuilder: (BuildContext context,
+                              //                   Object exception,
+                              //                   StackTrace? stackTrace) {
+                              //                 return Image.asset(
+                              //                     ImagesGameLovers.imageGeral);
+                              //               },
+                              //             ),
+                              //           ),
+                              //         ],
+                              //       )
+                              //     :
+                              Column(
+                                children: [
+                                  Container(
+                                    height:
+                                        // sizeWidth < 400
+                                        //     ? sizeWidth * .5
+                                        // :
+                                        sizeWidth * .1,
+                                    decoration: const BoxDecoration(
+                                      borderRadius: BorderRadius.all(
+                                        Radius.circular(5),
+                                      ),
+                                    ),
+                                    child: Image.network(
+                                      baseHttp + _games[index].imageUrl!,
+                                      errorBuilder: (BuildContext context,
+                                          Object exception,
+                                          StackTrace? stackTrace) {
+                                        return Image.asset(
+                                            ImagesGameLovers.imageGeral);
+                                      },
+                                      fit: BoxFit.fill,
+                                    ),
                                   ),
-                                ),
-                                child: Image.network(
-                                  baseHttp + _games[index].imageUrl!,
-                                  errorBuilder: (BuildContext context,
-                                      Object exception,
-                                      StackTrace? stackTrace) {
-                                    return Image.asset(
-                                        ImagesGameLovers.imageGeral);
-                                  },
-                                  fit: BoxFit.fill,
-                                ),
+                                  SizedBox(
+                                    height: sizeWidth * .1,
+                                  ),
+                                  // Row(
+                                  //   mainAxisAlignment:
+                                  //       MainAxisAlignment.spaceBetween,
+                                  //   children: [
+                                  //     Padding(
+                                  //       padding: const EdgeInsets.only(
+                                  //           left: 20, top: 20),
+                                  //       child: InkWell(
+                                  //         onTap: () => push(
+                                  //             context,
+                                  //             GamePage(
+                                  //               game: _games[index],
+                                  //             )),
+                                  //         child: const Icon(
+                                  //           Icons.east_outlined,
+                                  //           color: ColorsGameLovers.pink,
+                                  //         ),
+                                  //       ),
+                                  //     ),
+                                  Padding(
+                                    padding: const EdgeInsets.all(12),
+                                    child: Text(
+                                      _games[index].name,
+                                      style: StylesGameLovers.bodyBlack16,
+                                      overflow: TextOverflow.ellipsis,
+                                    ),
+                                  ),
+                                  //   ],
+                                  // ),
+                                ],
                               ),
-                              SizedBox(
-                                height: sizeWidth * .1,
-                              ),
-                              // Row(
-                              //   mainAxisAlignment:
-                              //       MainAxisAlignment.spaceBetween,
-                              //   children: [
-                              //     Padding(
-                              //       padding: const EdgeInsets.only(
-                              //           left: 20, top: 20),
-                              //       child: InkWell(
-                              //         onTap: () => push(
-                              //             context,
-                              //             GamePage(
-                              //               game: _games[index],
-                              //             )),
-                              //         child: const Icon(
-                              //           Icons.east_outlined,
-                              //           color: ColorsGameLovers.pink,
-                              //         ),
-                              //       ),
-                              //     ),
-                              SizedBox(
-                                width: sizeWidth * .5,
-                                child: Text(
-                                  _games[index].name,
-                                  style: StylesGameLovers.bodyBlack16,
-                                ),
-                              ),
-                              //   ],
-                              // ),
                             ],
                           ),
-                        ],
-                      ),
-                      decoration: const BoxDecoration(
-                          borderRadius: BorderRadius.all(
-                            Radius.circular(10),
+                          decoration: BoxDecoration(
+                              borderRadius: const BorderRadius.all(
+                                Radius.circular(10),
+                              ),
+                              boxShadow: const [
+                                BoxShadow(
+                                    blurRadius: 5,
+                                    color: ColorsGameLovers.greyLight,
+                                    offset: Offset(1, 2))
+                              ],
+                              color:
+                                  ColorsGameLovers.yellowLight.withOpacity(.5)
+                              // gradient: LinearGradient(
+                              //   begin: Alignment.bottomRight,
+                              //   end: Alignment.topLeft,
+                              //   colors: [
+                              //     ColorsGameLovers.yellowLight.withOpacity(.8),
+                              //     ColorsGameLovers.pinkLight.withOpacity(.8),
+                              //   ],
+                              // ),
+                              ),
+                        ),
+                      );
+                      // Card(
+                      //   color: Colors.amber,
+                      //   child: Center(child: Text('$index')),
+                      // );
+                    }),
+                SizedBox(
+                  height: sizeHeight * .05,
+                ),
+                _games.isEmpty
+                    ? Container()
+                    : InkWell(
+                        onTap: () {
+                          widget.homePageBloc.add(ListGamesEvent(
+                              limit: _games.length + 10,
+                              offset: _games.length,
+                              idPlatform: widget.idPlatform));
+                        },
+                        child: const Padding(
+                          padding: EdgeInsets.all(8.0),
+                          child: Icon(
+                            Icons.add,
+                            size: 30,
+                            color: ColorsGameLovers.pink,
                           ),
-                          boxShadow: [
-                            BoxShadow(
-                                blurRadius: 5,
-                                color: ColorsGameLovers.greyLight,
-                                offset: Offset(1, 2))
-                          ],
-                          color: ColorsGameLovers.yellowLight
-                          // gradient: LinearGradient(
-                          //   begin: Alignment.bottomRight,
-                          //   end: Alignment.topLeft,
-                          //   colors: [
-                          //     ColorsGameLovers.yellowLight.withOpacity(.8),
-                          //     ColorsGameLovers.pinkLight.withOpacity(.8),
-                          //   ],
-                          // ),
-                          ),
-                    ),
-                  );
-                  // Card(
-                  //   color: Colors.amber,
-                  //   child: Center(child: Text('$index')),
-                  // );
-                }),
-          );
-        }
-        return Container();
+                        ),
+                      )
+              ],
+            ),
+          ),
+        );
       },
     );
   }

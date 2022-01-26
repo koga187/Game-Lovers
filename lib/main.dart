@@ -1,6 +1,7 @@
 import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:game_lovers_app/core/theme/bloc/theme_bloc.dart';
 import 'package:game_lovers_app/features/games/data/datasources/game_remote_data_source.dart';
 import 'package:game_lovers_app/features/games/domain/repositories/game_repository.dart';
 import 'package:game_lovers_app/features/games/domain/usecases/list_games.dart';
@@ -47,22 +48,28 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return OKToast(
-      child: MaterialApp(
-        builder: (context, widget) => ResponsiveWrapper.builder(
-          ClampingScrollWrapper.builder(context, widget!),
-          defaultScale: true,
-          breakpoints: const [
-            ResponsiveBreakpoint.resize(350, name: MOBILE),
-            ResponsiveBreakpoint.autoScale(600, name: TABLET),
-            ResponsiveBreakpoint.resize(800, name: DESKTOP),
-            ResponsiveBreakpoint.autoScale(1200, name: 'XL'),
-          ],
+      child: BlocProvider(
+        create: (context) => ThemeBloc(),
+        child: BlocBuilder<ThemeBloc, ThemeState>(
+          builder: (context, state) {
+            debugPrint('ThemeBloc => $state ${state.themeData}');
+            return MaterialApp(
+              builder: (context, widget) => ResponsiveWrapper.builder(
+                ClampingScrollWrapper.builder(context, widget!),
+                defaultScale: true,
+                breakpoints: const [
+                  ResponsiveBreakpoint.resize(350, name: MOBILE),
+                  ResponsiveBreakpoint.autoScale(600, name: TABLET),
+                  ResponsiveBreakpoint.resize(800, name: DESKTOP),
+                  ResponsiveBreakpoint.autoScale(1200, name: 'XL'),
+                ],
+              ),
+              debugShowCheckedModeBanner: false,
+              theme: state.themeData,
+              home: const HomePage(),
+            );
+          },
         ),
-        debugShowCheckedModeBanner: false,
-        theme: ThemeData(
-          primarySwatch: Colors.yellow,
-        ),
-        home: const HomePage(),
       ),
     );
   }

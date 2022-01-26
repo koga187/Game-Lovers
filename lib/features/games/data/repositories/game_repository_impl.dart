@@ -32,10 +32,4 @@ class GameRepositoryImpl implements GameRepository {
       );
     }
   }
-
-  @override
-  Future<Either<Failure, String>> urlScreenshot({required int idScreenshots}) {
-    // TODO: implement urlScreenshot
-    throw UnimplementedError();
-  }
 }
