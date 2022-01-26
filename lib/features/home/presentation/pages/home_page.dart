@@ -20,11 +20,11 @@ class HomePage extends StatefulWidget {
 }
 
 class _HomePageState extends State<HomePage> {
-  late HomePageBloc xboxBloc;
-  late HomePageBloc nintendoBloc;
-  late HomePageBloc browserBloc;
-  late HomePageBloc playStationBloc;
-  late HomePageBloc pcBloc;
+  late HomePageBloc xboxBloc,
+      nintendoBloc,
+      browserBloc,
+      playStationBloc,
+      pcBloc;
 
   @override
   void initState() {
@@ -58,6 +58,13 @@ class _HomePageState extends State<HomePage> {
 
   Future<void> _handleStateUpdate(
       BuildContext context, HomePageState state) async {
+    if (state is Empty) {
+      GameLoversToast.showToastWithWidgetAndMessage(
+        context,
+        TextsGameLovers.defaultLoadingMessage,
+        const Icon(Icons.hourglass_empty),
+      );
+    }
     if (state is Loading) {
       GameLoversToast.showToastWithWidgetAndMessage(
         context,

@@ -97,9 +97,13 @@ class _GamePageState extends State<GamePage> {
               indent: 8,
               endIndent: 8,
             ),
-            _textGame(
-                textTitle: TextsGameLovers.description,
-                text: widget.game.description)
+            widget.game.description != null
+                ? _textGame(
+                    textTitle: TextsGameLovers.description,
+                    text: widget.game.description!)
+                : _textGame(
+                    textTitle: TextsGameLovers.description,
+                    text: TextsGameLovers.undefined)
           ],
         ),
       ),
@@ -155,6 +159,7 @@ class _GamePageState extends State<GamePage> {
           Flexible(
               child: Text(
             text,
+            textAlign: TextAlign.justify,
             style: StylesGameLovers.bodyBlack
                 .copyWith(color: Theme.of(context).secondaryHeaderColor),
           )),
@@ -218,9 +223,13 @@ class _GamePageState extends State<GamePage> {
               indent: 8,
               endIndent: 8,
             ),
-            _textGame(
-                textTitle: TextsGameLovers.description,
-                text: widget.game.description)
+            widget.game.description != null
+                ? _textGame(
+                    textTitle: TextsGameLovers.description,
+                    text: widget.game.description!)
+                : _textGame(
+                    textTitle: TextsGameLovers.description,
+                    text: TextsGameLovers.undefined)
           ],
         )
       ],
