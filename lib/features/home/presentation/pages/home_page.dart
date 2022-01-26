@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:game_lovers_app/core/theme/bloc/theme_bloc.dart';
 import 'package:game_lovers_app/core/values/colors_game_lovers.dart';
 import 'package:game_lovers_app/core/values/images_game_lovers.dart';
 import 'package:game_lovers_app/core/values/styles_game_lovers.dart';
@@ -33,16 +34,16 @@ class _HomePageState extends State<HomePage> {
     )..add(const ListGamesEvent(limit: 10, offset: 10, idPlatform: 49));
     nintendoBloc = HomePageBloc(
       listGames: context.read<ListGames>(),
-    );
+    )..add(const ListGamesEvent(limit: 10, offset: 10, idPlatform: 130));
     browserBloc = HomePageBloc(
       listGames: context.read<ListGames>(),
-    );
+    )..add(const ListGamesEvent(limit: 10, offset: 10, idPlatform: 82));
     playStationBloc = HomePageBloc(
       listGames: context.read<ListGames>(),
-    );
+    )..add(const ListGamesEvent(limit: 10, offset: 10, idPlatform: 48));
     pcBloc = HomePageBloc(
       listGames: context.read<ListGames>(),
-    );
+    )..add(const ListGamesEvent(limit: 10, offset: 10, idPlatform: 6));
   }
 
   @override
@@ -95,13 +96,16 @@ class _HomePageState extends State<HomePage> {
                     style: StylesGameLovers.titleAppBar,
                   ),
                 ),
-                Container(
-                  padding: const EdgeInsets.only(left: 13),
-                  height: 50,
-                  width: 50,
-                  child: Image.asset(
-                    ImagesGameLovers.logo,
-                    color: ColorsGameLovers.black,
+                InkWell(
+                  onTap: () => context.read<ThemeBloc>().add(ThemeChanged()),
+                  child: Container(
+                    padding: const EdgeInsets.only(left: 13),
+                    height: 50,
+                    width: 50,
+                    child: Image.asset(
+                      ImagesGameLovers.logo,
+                      color: ColorsGameLovers.black,
+                    ),
                   ),
                 ),
               ],
@@ -111,7 +115,7 @@ class _HomePageState extends State<HomePage> {
             bottom: tabBar(),
           ),
           body: _body(),
-          backgroundColor: Colors.white,
+          // backgroundColor: Theme.of(context).primaryColor,
         ),
       ),
     );
@@ -123,10 +127,10 @@ class _HomePageState extends State<HomePage> {
         labelColor: ColorsGameLovers.black,
         unselectedLabelColor: Colors.white,
         indicatorSize: TabBarIndicatorSize.label,
-        indicator: const BoxDecoration(
-            borderRadius: BorderRadius.only(
+        indicator: BoxDecoration(
+            borderRadius: const BorderRadius.only(
                 topLeft: Radius.circular(10), topRight: Radius.circular(10)),
-            color: Colors.white),
+            color: Theme.of(context).backgroundColor),
         tabs: [
           tab(text: TextsGameLovers.xbox),
           tab(text: TextsGameLovers.nitendoSwitch),
@@ -145,6 +149,7 @@ class _HomePageState extends State<HomePage> {
           child: Text(
             text,
             style: StylesGameLovers.bodyBlack.copyWith(
+              color: Theme.of(context).secondaryHeaderColor,
               fontSize: ResponsiveValue(
                 context,
                 defaultValue: 14.0,
@@ -174,13 +179,50 @@ class _HomePageState extends State<HomePage> {
         builder: (context, state) {
           return HomeGridView(
             homePageBloc: xboxBloc,
+            idPlatform: 49,
           );
         },
       ),
-      Icon(Icons.movie),
-      Icon(Icons.games),
-      Icon(Icons.apps),
-      Icon(Icons.movie),
+      BlocConsumer(
+        listener: _handleStateUpdate,
+        bloc: nintendoBloc,
+        builder: (context, state) {
+          return HomeGridView(
+            homePageBloc: nintendoBloc,
+            idPlatform: 130,
+          );
+        },
+      ),
+      BlocConsumer(
+        listener: _handleStateUpdate,
+        bloc: pcBloc,
+        builder: (context, state) {
+          return HomeGridView(
+            homePageBloc: pcBloc,
+            idPlatform: 6,
+          );
+        },
+      ),
+      BlocConsumer(
+        listener: _handleStateUpdate,
+        bloc: browserBloc,
+        builder: (context, state) {
+          return HomeGridView(
+            homePageBloc: browserBloc,
+            idPlatform: 82,
+          );
+        },
+      ),
+      BlocConsumer(
+        listener: _handleStateUpdate,
+        bloc: playStationBloc,
+        builder: (context, state) {
+          return HomeGridView(
+            homePageBloc: playStationBloc,
+            idPlatform: 48,
+          );
+        },
+      ),
     ]);
     // return Stack(children: [
     //   Positioned.fill(

@@ -24,12 +24,13 @@ class _GamePageState extends State<GamePage> {
     return SafeArea(
       child: Scaffold(
         appBar: AppBar(
-          backgroundColor: ColorsGameLovers.theme,
-        ),
+            backgroundColor: ColorsGameLovers.theme,
+            iconTheme: const IconThemeData(
+              color: ColorsGameLovers.black, //change your color here
+            )),
         body: sizeWidth < 400
             ? _bodyCell(sizeWidth, sizeHeight)
             : _bodyMoreLarger(sizeWidth, sizeHeight),
-        backgroundColor: ColorsGameLovers.white,
       ),
     );
   }
@@ -46,7 +47,8 @@ class _GamePageState extends State<GamePage> {
             Center(
               child: Text(
                 widget.game.name,
-                style: StylesGameLovers.bodyBlack16,
+                style: StylesGameLovers.bodyBlack16
+                    .copyWith(color: Theme.of(context).secondaryHeaderColor),
               ),
             ),
             Column(
@@ -61,11 +63,17 @@ class _GamePageState extends State<GamePage> {
                           itemBuilder: (context, index) {
                             return Text(
                               '${widget.game.genres?[index]}${widget.game.genres!.length - 1 == index ? '' : ', '}',
-                              style: StylesGameLovers.bodyBlack,
+                              style: StylesGameLovers.bodyBlack.copyWith(
+                                  color:
+                                      Theme.of(context).secondaryHeaderColor),
                             );
                           },
                         )
-                      : const Text(TextsGameLovers.undefined),
+                      : Text(
+                          TextsGameLovers.undefined,
+                          style: StylesGameLovers.bodyBlack.copyWith(
+                              color: Theme.of(context).secondaryHeaderColor),
+                        ),
                 ),
                 list(
                     widget: ListView.builder(
@@ -75,7 +83,8 @@ class _GamePageState extends State<GamePage> {
                       itemBuilder: (context, index) {
                         return Text(
                           '${widget.game.platform[index]}${widget.game.platform.length - 1 == index ? '' : ', '}',
-                          style: StylesGameLovers.bodyBlack,
+                          style: StylesGameLovers.bodyBlack.copyWith(
+                              color: Theme.of(context).secondaryHeaderColor),
                         );
                       },
                     ),
@@ -120,7 +129,8 @@ class _GamePageState extends State<GamePage> {
         children: [
           Text(
             title,
-            style: StylesGameLovers.bodyBlack16,
+            style: StylesGameLovers.bodyBlack16
+                .copyWith(color: Theme.of(context).secondaryHeaderColor),
           ),
           SizedBox(
               height: MediaQuery.of(context).size.height * .02,
@@ -139,12 +149,14 @@ class _GamePageState extends State<GamePage> {
         children: [
           Text(
             textTitle,
-            style: StylesGameLovers.bodyBlack16,
+            style: StylesGameLovers.bodyBlack16
+                .copyWith(color: Theme.of(context).secondaryHeaderColor),
           ),
           Flexible(
               child: Text(
             text,
-            style: StylesGameLovers.bodyBlack,
+            style: StylesGameLovers.bodyBlack
+                .copyWith(color: Theme.of(context).secondaryHeaderColor),
           )),
         ],
       ),
@@ -161,7 +173,8 @@ class _GamePageState extends State<GamePage> {
             Center(
               child: Text(
                 widget.game.name,
-                style: StylesGameLovers.bodyBlack16,
+                style: StylesGameLovers.bodyBlack16
+                    .copyWith(color: Theme.of(context).secondaryHeaderColor),
               ),
             ),
             list(
@@ -174,11 +187,16 @@ class _GamePageState extends State<GamePage> {
                       itemBuilder: (context, index) {
                         return Text(
                           '${widget.game.genres?[index]}${widget.game.genres!.length - 1 == index ? '' : ', '}',
-                          style: StylesGameLovers.bodyBlack,
+                          style: StylesGameLovers.bodyBlack.copyWith(
+                              color: Theme.of(context).secondaryHeaderColor),
                         );
                       },
                     )
-                  : const Text(TextsGameLovers.undefined),
+                  : Text(
+                      TextsGameLovers.undefined,
+                      style: StylesGameLovers.bodyBlack.copyWith(
+                          color: Theme.of(context).secondaryHeaderColor),
+                    ),
             ),
             list(
                 widget: ListView.builder(
@@ -188,7 +206,8 @@ class _GamePageState extends State<GamePage> {
                   itemBuilder: (context, index) {
                     return Text(
                       '${widget.game.platform[index]}${widget.game.platform.length - 1 == index ? '' : ', '}',
-                      style: StylesGameLovers.bodyBlack,
+                      style: StylesGameLovers.bodyBlack.copyWith(
+                          color: Theme.of(context).secondaryHeaderColor),
                     );
                   },
                 ),

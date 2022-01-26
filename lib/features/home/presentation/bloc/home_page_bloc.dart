@@ -13,22 +13,7 @@ class HomePageBloc extends Bloc<HomePageEvent, HomePageState> {
   HomePageBloc({required this.listGames}) : super(HomePageInitial()) {
     on<ListGamesEvent>((event, emit) async {
       emit(Loading());
-      // final failureOrList = await listPetsAndUsers!(ListPetsParams(
-      //   type: event.type,
-      //   status: event.status,
-      // ));
 
-      // yield failureOrList.fold(
-      //   (l) => Error(
-      //       message: mapFailureToMessage(
-      //     l,
-      //   )),
-      //   (r) {
-      //     return Loaded(
-      //       list: r,
-      //     );
-      //   },
-      // );
       final failureOrList = await listGames(
         ListGamesParams(
             limit: event.limit,
