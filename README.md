@@ -1,6 +1,6 @@
 # Game Lovers
 
-Game Lovers é uma aplicação voltada para amantes de jogos em que lista jogos das 5 principais plataformas, são elas: Xbox One, Nitendo Switch, PC (Windows), Web Browser e PS4. Vale destacar que a IGDB API trazia n plataformas de jogos, porém foram escolhidas apenas 5, das mais conhecidas.
+Game Lovers é uma aplicação voltada para amantes de jogos em que lista jogos das 5 principais plataformas, são elas: Xbox One, Nintendo Switch, PC (Windows), Web Browser e PS4. Vale destacar que a IGDB API trazia n plataformas de jogos, porém foram escolhidas apenas 5, das mais conhecidas.
       <p align="center">
       <img align="right" src="https://j.gifs.com/J8Wqpv.gif" height="300">
       <img align="right" src="https://j.gifs.com/EqW9om.gif" height="300"> 
