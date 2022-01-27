@@ -5,7 +5,6 @@ import 'package:game_lovers_app/features/games/data/datasources/game_local_data_
 import 'package:game_lovers_app/features/games/data/datasources/game_remote_data_source.dart';
 import 'package:game_lovers_app/features/games/data/model/game_model.dart';
 import 'package:game_lovers_app/features/games/data/repositories/game_repository_impl.dart';
-import 'package:game_lovers_app/features/games/domain/entities/game.dart';
 
 import 'package:mocktail/mocktail.dart';
 
@@ -32,7 +31,6 @@ void main() {
     genres: ['genres', 'name'],
     platforms: ['platforms', 'name'],
   );
-  const Game tGame = tGameModel;
 
   setUp(() {
     mockGameRemoteDataSource = MockGameRemoteDataSource();

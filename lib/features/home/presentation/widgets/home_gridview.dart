@@ -91,8 +91,8 @@ class _HomeGridViewState extends State<HomeGridView> {
                                   fit: BoxFit.fill,
                                   width: sizeWidth,
                                 ),
-                                placeholder: (context, url) =>
-                                    const CircularProgressIndicator(),
+                                placeholder: (context, url) => const Center(
+                                    child: CircularProgressIndicator()),
                               ),
                               Column(
                                 mainAxisAlignment: MainAxisAlignment.end,
