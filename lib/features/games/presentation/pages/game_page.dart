@@ -171,7 +171,10 @@ class _GamePageState extends State<GamePage> {
   _bodyMoreLarger(double sizeWidth, double sizeHeight) {
     return Row(
       children: [
-        image(sizeWidth, sizeHeight),
+        SizedBox(
+            width: sizeWidth * .5,
+            height: sizeHeight * .5,
+            child: image(sizeWidth, sizeHeight)),
         SizedBox(
           width: sizeWidth * .5,
           height: sizeHeight * .5,

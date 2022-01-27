@@ -31,6 +31,8 @@ class _HomeGridViewState extends State<HomeGridView> {
     final double sizeWidth = MediaQuery.of(context).size.width;
     final double sizeHeight = MediaQuery.of(context).size.height;
 
+    final ScrollController _slidingInYourDMs = ScrollController();
+
     return BlocConsumer(
       listener: (context, state) {
         if (state is Loading) {
@@ -58,106 +60,118 @@ class _HomeGridViewState extends State<HomeGridView> {
         }
         return Padding(
           padding: const EdgeInsets.all(10),
-          child: SingleChildScrollView(
-            child: Column(
-              children: [
-                GridView.builder(
-                    physics: const NeverScrollableScrollPhysics(),
-                    shrinkWrap: true,
-                    gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
-                        crossAxisCount: checkSize(sizeWidth),
-                        crossAxisSpacing: sizeWidth * .02,
-                        mainAxisSpacing: sizeWidth * .02),
-                    itemCount: _games.length,
-                    itemBuilder: (BuildContext context, int index) {
-                      return InkWell(
-                        onTap: () => push(
-                            context,
-                            GamePage(
-                              game: _games[index],
-                            )),
-                        child: Container(
-                          width: sizeWidth * .1,
-                          height: sizeWidth * .1,
-                          child: Stack(
-                            children: [
-                              CachedNetworkImage(
-                                imageUrl: baseHttp + _games[index].imageUrl!,
-                                width: sizeWidth,
-                                fit: BoxFit.fill,
-                                errorWidget: (context, url, error) =>
-                                    Image.asset(
-                                  ImagesGameLovers.imageGeral,
-                                  fit: BoxFit.fill,
-                                  width: sizeWidth,
-                                ),
-                                placeholder: (context, url) => const Center(
-                                    child: CircularProgressIndicator()),
-                              ),
-                              Column(
-                                mainAxisAlignment: MainAxisAlignment.end,
-                                children: [
-                                  SizedBox(
-                                    height: sizeWidth * .1,
-                                  ),
-
-                                  Container(
-                                    width: sizeWidth,
-                                    color:
-                                        ColorsGameLovers.white.withOpacity(.7),
-                                    padding: const EdgeInsets.all(12),
-                                    child: Text(
-                                      _games[index].name,
-                                      style: StylesGameLovers.bodyBlack16,
-                                      overflow: TextOverflow.ellipsis,
-                                    ),
-                                  ),
-                                  //   ],
-                                  // ),
-                                ],
-                              ),
-                            ],
-                          ),
-                          decoration: const BoxDecoration(
-                            borderRadius: BorderRadius.all(
-                              Radius.circular(10),
-                            ),
-                            boxShadow: [
-                              BoxShadow(
-                                  blurRadius: 5,
-                                  color: ColorsGameLovers.greyLight,
-                                  offset: Offset(1, 2))
-                            ],
-                          ),
-                        ),
-                      );
-                    }),
-                SizedBox(
-                  height: sizeHeight * .05,
-                ),
-                _games.isEmpty
-                    ? Container()
-                    : InkWell(
-                        onTap: () {
-                          widget.homePageBloc.add(ListGamesEvent(
-                              limit: _games.length + 10,
-                              offset: _games.length,
-                              idPlatform: widget.idPlatform));
-                        },
-                        child: const Padding(
-                          padding: EdgeInsets.all(8.0),
-                          child: Icon(
-                            Icons.add,
-                            size: 30,
-                            color: ColorsGameLovers.pink,
-                          ),
-                        ),
-                      )
-              ],
-            ),
-          ),
+          child: sizeWidth > 400
+              ? Scrollbar(
+                  child: singleChildScrollView(
+                      sizeWidth, sizeHeight, _slidingInYourDMs),
+                  isAlwaysShown: true,
+                  showTrackOnHover: true,
+                  controller: _slidingInYourDMs,
+                )
+              : singleChildScrollView(sizeWidth, sizeHeight, _slidingInYourDMs),
         );
       },
+    );
+  }
+
+  SingleChildScrollView singleChildScrollView(
+      double sizeWidth, double sizeHeight, ScrollController controller) {
+    return SingleChildScrollView(
+      controller: sizeWidth > 400 ? controller : null,
+      child: Column(
+        children: [
+          GridView.builder(
+              physics: const NeverScrollableScrollPhysics(),
+              shrinkWrap: true,
+              gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+                  crossAxisCount: checkSize(sizeWidth),
+                  crossAxisSpacing: sizeWidth * .02,
+                  mainAxisSpacing: sizeWidth * .02),
+              itemCount: _games.length,
+              itemBuilder: (BuildContext context, int index) {
+                return InkWell(
+                  onTap: () => push(
+                      context,
+                      GamePage(
+                        game: _games[index],
+                      )),
+                  child: Container(
+                    width: sizeWidth * .1,
+                    height: sizeWidth * .1,
+                    child: Stack(
+                      children: [
+                        CachedNetworkImage(
+                          imageUrl: baseHttp + _games[index].imageUrl!,
+                          width: sizeWidth,
+                          fit: BoxFit.fill,
+                          errorWidget: (context, url, error) => Image.asset(
+                            ImagesGameLovers.imageGeral,
+                            fit: BoxFit.fill,
+                            width: sizeWidth,
+                          ),
+                          placeholder: (context, url) =>
+                              const Center(child: CircularProgressIndicator()),
+                        ),
+                        Column(
+                          mainAxisAlignment: MainAxisAlignment.end,
+                          children: [
+                            SizedBox(
+                              height: sizeWidth * .1,
+                            ),
+
+                            Container(
+                              width: sizeWidth,
+                              color: ColorsGameLovers.white.withOpacity(.7),
+                              padding: const EdgeInsets.all(12),
+                              child: Text(
+                                _games[index].name,
+                                style: StylesGameLovers.bodyBlack16,
+                                overflow: TextOverflow.ellipsis,
+                              ),
+                            ),
+                            //   ],
+                            // ),
+                          ],
+                        ),
+                      ],
+                    ),
+                    decoration: const BoxDecoration(
+                      borderRadius: BorderRadius.all(
+                        Radius.circular(10),
+                      ),
+                      boxShadow: [
+                        BoxShadow(
+                            blurRadius: 5,
+                            color: ColorsGameLovers.greyLight,
+                            offset: Offset(1, 2))
+                      ],
+                    ),
+                  ),
+                );
+              }),
+          SizedBox(
+            height: sizeHeight * .05,
+          ),
+          _games.isEmpty
+              ? Container()
+              : InkWell(
+                  onTap: () {
+                    widget.homePageBloc.add(ListGamesEvent(
+                        limit: _games.length + 10,
+                        offset: _games.length,
+                        idPlatform: widget.idPlatform));
+                  },
+                  child: const Padding(
+                    padding: EdgeInsets.all(8.0),
+                    child: Icon(
+                      Icons.add,
+                      size: 30,
+                      color: ColorsGameLovers.pink,
+                    ),
+                  ),
+                )
+        ],
+      ),
     );
   }
 

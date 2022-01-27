@@ -231,23 +231,5 @@ class _HomePageState extends State<HomePage> {
         },
       ),
     ]);
-    // return Stack(children: [
-    //   Positioned.fill(
-    //     child: Align(
-    //       alignment: Alignment.bottomRight,
-    //       child: Image.asset(
-    //         ImagesGameLovers.detail,
-    //         color: ColorsGameLovers.pink,
-    //       ),
-    //     ),
-    //   ),
-    //   const TabBarView(children: [
-    //     GameLoversGridView(),
-    //     Icon(Icons.movie),
-    //     Icon(Icons.games),
-    //     Icon(Icons.apps),
-    //     Icon(Icons.movie),
-    //   ]),
-    // ]);
   }
 }
