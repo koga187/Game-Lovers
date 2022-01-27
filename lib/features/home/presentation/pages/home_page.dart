@@ -140,7 +140,7 @@ class _HomePageState extends State<HomePage> {
             color: Theme.of(context).backgroundColor),
         tabs: [
           tab(text: TextsGameLovers.xbox),
-          tab(text: TextsGameLovers.nitendoSwitch),
+          tab(text: TextsGameLovers.nintendoSwitch),
           tab(text: TextsGameLovers.pc),
           tab(text: TextsGameLovers.web),
           tab(text: TextsGameLovers.ps4),

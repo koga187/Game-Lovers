@@ -4,7 +4,7 @@ class TextsGameLovers {
   static const gameLovers = 'Game Lovers App';
 
   //Plataformas
-  static const nitendoSwitch = 'Nitendo Switch';
+  static const nintendoSwitch = 'Nintendo Switch';
   static const pc = 'PC (Windows)';
   static const web = 'Web Browser';
   static const ps4 = 'PS4';
