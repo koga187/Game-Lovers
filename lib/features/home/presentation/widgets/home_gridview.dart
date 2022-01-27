@@ -1,3 +1,4 @@
+import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:game_lovers_app/core/config/api_config.dart';
@@ -80,19 +81,29 @@ class _HomeGridViewState extends State<HomeGridView> {
                           height: sizeWidth * .1,
                           child: Stack(
                             children: [
-                              Image.network(
-                                baseHttp + _games[index].imageUrl!,
-                                errorBuilder: (BuildContext context,
-                                    Object exception, StackTrace? stackTrace) {
-                                  return Image.asset(
-                                    ImagesGameLovers.imageGeral,
-                                    fit: BoxFit.fill,
-                                    width: MediaQuery.of(context).size.width,
-                                  );
-                                },
+                              CachedNetworkImage(
+                                imageUrl: baseHttp + _games[index].imageUrl!,
+                                width: sizeWidth,
                                 fit: BoxFit.fill,
-                                height: sizeHeight,
+                                placeholder: (context, url) => Image.asset(
+                                  ImagesGameLovers.imageGeral,
+                                  fit: BoxFit.fill,
+                                  width: sizeWidth,
+                                ),
                               ),
+                              // Image.network(
+                              //   baseHttp + _games[index].imageUrl!,
+                              //   errorBuilder: (BuildContext context,
+                              //       Object exception, StackTrace? stackTrace) {
+                              //     return Image.asset(
+                              //       ImagesGameLovers.imageGeral,
+                              //       fit: BoxFit.fill,
+                              //       width: MediaQuery.of(context).size.width,
+                              //     );
+                              //   },
+                              //   fit: BoxFit.fill,
+                              //   height: sizeHeight,
+                              // ),
                               Column(
                                 mainAxisAlignment: MainAxisAlignment.end,
                                 children: [

@@ -172,65 +172,69 @@ class _GamePageState extends State<GamePage> {
     return Row(
       children: [
         image(sizeWidth, sizeHeight),
-        Column(
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: [
-            Center(
-              child: Text(
-                widget.game.name,
-                style: StylesGameLovers.bodyBlack16
-                    .copyWith(color: Theme.of(context).secondaryHeaderColor),
-              ),
-            ),
-            list(
-              title: TextsGameLovers.genres,
-              widget: widget.game.genres != null
-                  ? ListView.builder(
-                      shrinkWrap: true,
-                      scrollDirection: Axis.horizontal,
-                      itemCount: widget.game.genres?.length,
-                      itemBuilder: (context, index) {
-                        return Text(
-                          '${widget.game.genres?[index]}${widget.game.genres!.length - 1 == index ? '' : ', '}',
-                          style: StylesGameLovers.bodyBlack.copyWith(
-                              color: Theme.of(context).secondaryHeaderColor),
-                        );
-                      },
-                    )
-                  : Text(
-                      TextsGameLovers.undefined,
-                      style: StylesGameLovers.bodyBlack.copyWith(
-                          color: Theme.of(context).secondaryHeaderColor),
-                    ),
-            ),
-            list(
-                widget: ListView.builder(
-                  shrinkWrap: true,
-                  scrollDirection: Axis.horizontal,
-                  itemCount: widget.game.platform.length,
-                  itemBuilder: (context, index) {
-                    return Text(
-                      '${widget.game.platform[index]}${widget.game.platform.length - 1 == index ? '' : ', '}',
-                      style: StylesGameLovers.bodyBlack.copyWith(
-                          color: Theme.of(context).secondaryHeaderColor),
-                    );
-                  },
+        SizedBox(
+          width: sizeWidth * .5,
+          height: sizeHeight * .5,
+          child: Column(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: [
+              Center(
+                child: Text(
+                  widget.game.name,
+                  style: StylesGameLovers.bodyBlack16
+                      .copyWith(color: Theme.of(context).secondaryHeaderColor),
                 ),
-                title: TextsGameLovers.platform),
-            const Divider(
-              color: ColorsGameLovers.greyLight,
-              thickness: 1,
-              indent: 8,
-              endIndent: 8,
-            ),
-            widget.game.description != null
-                ? _textGame(
-                    textTitle: TextsGameLovers.description,
-                    text: widget.game.description!)
-                : _textGame(
-                    textTitle: TextsGameLovers.description,
-                    text: TextsGameLovers.undefined)
-          ],
+              ),
+              list(
+                title: TextsGameLovers.genres,
+                widget: widget.game.genres != null
+                    ? ListView.builder(
+                        shrinkWrap: true,
+                        scrollDirection: Axis.horizontal,
+                        itemCount: widget.game.genres?.length,
+                        itemBuilder: (context, index) {
+                          return Text(
+                            '${widget.game.genres?[index]}${widget.game.genres!.length - 1 == index ? '' : ', '}',
+                            style: StylesGameLovers.bodyBlack.copyWith(
+                                color: Theme.of(context).secondaryHeaderColor),
+                          );
+                        },
+                      )
+                    : Text(
+                        TextsGameLovers.undefined,
+                        style: StylesGameLovers.bodyBlack.copyWith(
+                            color: Theme.of(context).secondaryHeaderColor),
+                      ),
+              ),
+              list(
+                  widget: ListView.builder(
+                    // shrinkWrap: true,
+                    // scrollDirection: Axis.horizontal,
+                    itemCount: widget.game.platform.length,
+                    itemBuilder: (context, index) {
+                      return Text(
+                        '${widget.game.platform[index]}${widget.game.platform.length - 1 == index ? '' : ', '}',
+                        style: StylesGameLovers.bodyBlack.copyWith(
+                            color: Theme.of(context).secondaryHeaderColor),
+                      );
+                    },
+                  ),
+                  title: TextsGameLovers.platform),
+              const Divider(
+                color: ColorsGameLovers.greyLight,
+                thickness: 1,
+                indent: 8,
+                endIndent: 8,
+              ),
+              widget.game.description != null
+                  ? _textGame(
+                      textTitle: TextsGameLovers.description,
+                      text: widget.game.description!)
+                  : _textGame(
+                      textTitle: TextsGameLovers.description,
+                      text: TextsGameLovers.undefined)
+            ],
+          ),
         )
       ],
     );
