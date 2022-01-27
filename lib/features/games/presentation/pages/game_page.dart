@@ -28,7 +28,7 @@ class _GamePageState extends State<GamePage> {
             iconTheme: const IconThemeData(
               color: ColorsGameLovers.black, //change your color here
             )),
-        body: sizeWidth < 400
+        body: sizeWidth < 600
             ? _bodyCell(sizeWidth, sizeHeight)
             : _bodyMoreLarger(sizeWidth, sizeHeight),
       ),
@@ -54,6 +54,8 @@ class _GamePageState extends State<GamePage> {
             Column(
               children: [
                 list(
+                  height: sizeHeight,
+                  width: sizeWidth,
                   title: TextsGameLovers.genres,
                   widget: widget.game.genres != null
                       ? ListView.builder(
@@ -76,6 +78,8 @@ class _GamePageState extends State<GamePage> {
                         ),
                 ),
                 list(
+                    height: sizeHeight,
+                    width: sizeWidth,
                     widget: ListView.builder(
                       shrinkWrap: true,
                       scrollDirection: Axis.horizontal,
@@ -125,7 +129,12 @@ class _GamePageState extends State<GamePage> {
     );
   }
 
-  Padding list({required Widget widget, required String title}) {
+  Padding list({
+    required Widget widget,
+    required String title,
+    required double height,
+    required double width,
+  }) {
     return Padding(
       padding: const EdgeInsets.all(12),
       child: Row(
@@ -136,10 +145,10 @@ class _GamePageState extends State<GamePage> {
             style: StylesGameLovers.bodyBlack16
                 .copyWith(color: Theme.of(context).secondaryHeaderColor),
           ),
-          SizedBox(
-              height: MediaQuery.of(context).size.height * .02,
-              width: MediaQuery.of(context).size.width * .5,
-              child: widget),
+          Flexible(
+            child: SizedBox(
+                height: height * .03, width: width * .5, child: widget),
+          ),
         ],
       ),
     );
@@ -169,77 +178,81 @@ class _GamePageState extends State<GamePage> {
   }
 
   _bodyMoreLarger(double sizeWidth, double sizeHeight) {
-    return Row(
-      children: [
-        SizedBox(
-            width: sizeWidth * .5,
-            height: sizeHeight * .5,
-            child: image(sizeWidth, sizeHeight)),
-        SizedBox(
-          width: sizeWidth * .5,
-          height: sizeHeight * .5,
-          child: Column(
-            mainAxisAlignment: MainAxisAlignment.center,
-            children: [
-              Center(
-                child: Text(
-                  widget.game.name,
-                  style: StylesGameLovers.bodyBlack16
-                      .copyWith(color: Theme.of(context).secondaryHeaderColor),
-                ),
-              ),
-              list(
-                title: TextsGameLovers.genres,
-                widget: widget.game.genres != null
-                    ? ListView.builder(
-                        shrinkWrap: true,
-                        scrollDirection: Axis.horizontal,
-                        itemCount: widget.game.genres?.length,
+    return Center(
+      child: SingleChildScrollView(
+        child: Row(
+          mainAxisAlignment: MainAxisAlignment.spaceAround,
+          children: [
+            image(sizeWidth, sizeHeight),
+            SizedBox(
+              width: sizeWidth * .5,
+              child: Column(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  Center(
+                    child: Text(
+                      widget.game.name,
+                      style: StylesGameLovers.bodyBlack16.copyWith(
+                          color: Theme.of(context).secondaryHeaderColor),
+                    ),
+                  ),
+                  list(
+                    height: sizeHeight,
+                    width: sizeWidth,
+                    title: TextsGameLovers.genres,
+                    widget: widget.game.genres != null
+                        ? ListView.builder(
+                            shrinkWrap: true,
+                            scrollDirection: Axis.horizontal,
+                            itemCount: widget.game.genres?.length,
+                            itemBuilder: (context, index) {
+                              return Text(
+                                '${widget.game.genres?[index]}${widget.game.genres!.length - 1 == index ? '' : ', '}',
+                                style: StylesGameLovers.bodyBlack.copyWith(
+                                    color:
+                                        Theme.of(context).secondaryHeaderColor),
+                              );
+                            },
+                          )
+                        : Text(
+                            TextsGameLovers.undefined,
+                            style: StylesGameLovers.bodyBlack.copyWith(
+                                color: Theme.of(context).secondaryHeaderColor),
+                          ),
+                  ),
+                  list(
+                      height: sizeHeight,
+                      width: sizeWidth,
+                      widget: ListView.builder(
+                        itemCount: widget.game.platform.length,
                         itemBuilder: (context, index) {
                           return Text(
-                            '${widget.game.genres?[index]}${widget.game.genres!.length - 1 == index ? '' : ', '}',
+                            '${widget.game.platform[index]}${widget.game.platform.length - 1 == index ? '' : ', '}',
                             style: StylesGameLovers.bodyBlack.copyWith(
                                 color: Theme.of(context).secondaryHeaderColor),
                           );
                         },
-                      )
-                    : Text(
-                        TextsGameLovers.undefined,
-                        style: StylesGameLovers.bodyBlack.copyWith(
-                            color: Theme.of(context).secondaryHeaderColor),
                       ),
-              ),
-              list(
-                  widget: ListView.builder(
-                    // shrinkWrap: true,
-                    // scrollDirection: Axis.horizontal,
-                    itemCount: widget.game.platform.length,
-                    itemBuilder: (context, index) {
-                      return Text(
-                        '${widget.game.platform[index]}${widget.game.platform.length - 1 == index ? '' : ', '}',
-                        style: StylesGameLovers.bodyBlack.copyWith(
-                            color: Theme.of(context).secondaryHeaderColor),
-                      );
-                    },
+                      title: TextsGameLovers.platform),
+                  const Divider(
+                    color: ColorsGameLovers.greyLight,
+                    thickness: 1,
+                    indent: 8,
+                    endIndent: 8,
                   ),
-                  title: TextsGameLovers.platform),
-              const Divider(
-                color: ColorsGameLovers.greyLight,
-                thickness: 1,
-                indent: 8,
-                endIndent: 8,
+                  widget.game.description != null
+                      ? _textGame(
+                          textTitle: TextsGameLovers.description,
+                          text: widget.game.description!)
+                      : _textGame(
+                          textTitle: TextsGameLovers.description,
+                          text: TextsGameLovers.undefined)
+                ],
               ),
-              widget.game.description != null
-                  ? _textGame(
-                      textTitle: TextsGameLovers.description,
-                      text: widget.game.description!)
-                  : _textGame(
-                      textTitle: TextsGameLovers.description,
-                      text: TextsGameLovers.undefined)
-            ],
-          ),
-        )
-      ],
+            )
+          ],
+        ),
+      ),
     );
   }
 }
