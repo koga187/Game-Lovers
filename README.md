@@ -1,11 +1,11 @@
 # Game Lovers
 
-Game Lovers é uma aplicação voltada para amantes de jogos em que lista jogos das 5 principais plataformas, são elas: Xbox One, Nintendo Switch, PC (Windows), Web Browser e PS4. Vale destacar que a IGDB API trazia n plataformas de jogos, porém foram escolhidas apenas 5, das mais conhecidas.
+Game Lovers é uma aplicação voltada para amantes de jogos em que lista jogos das 5 principais plataformas, são elas: Xbox One, Nintendo Switch, PC (Windows), Web Browser e PS4. Vale destacar que a IGDB API trazia "n" plataformas de jogos, porém foram escolhidas apenas 5, das mais conhecidas.
       <p align="center">
       <img align="right" src="https://j.gifs.com/J8Wqpv.gif" height="300">
       <img align="right" src="https://j.gifs.com/EqW9om.gif" height="300"> 
       </p>
-O app conta com cached local, então todas as telas navegadas ficam armazenadas localmente, permitindo que o usuário navegue offline.
+O app conta com cache local, então todas as telas navegadas ficam armazenadas localmente, permitindo que o usuário navegue offline.
 
 Outro diferencial é que a aplicação possui responsividade,sendo possível executá-la em desktop.
       
@@ -23,8 +23,6 @@ Mobile:
 
 MACOS: 
 - Executar o comando ```flutter config --enable-macos-desktop```
-- Em seguida acrescentar ```<key>com.apple.security.network.client</key>
-<true/>```no arquivo ```DebugProfile.entitlements``` dentro do diretório ```macos/Runner```.
 - Run no arquivo ```main```.
 
 Para mais instruções de como executar o projeto em outros sistemas operacionais, clique [aqui](https://docs.flutter.dev/desktop).
@@ -41,10 +39,7 @@ Contém duas interfaces simples:
   
   - 1. Em que o usuário filtra a lista de jogos (formato ```GridView```) pela plataforma desejada através de uma ```tab```.
   - 2. Ao clicar em um jogo recebe uma tela com os detalhes do jogo em questão.
-  
-      
-      
-  3- A aplicação conta ainda com uma versão dark mode ao clicar na logo do app na região superior direita.
+  - 3. A aplicação conta ainda com uma versão dark mode ao clicar na logo do app na região superior direita.
       
 
 
