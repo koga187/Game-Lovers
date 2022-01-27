@@ -85,25 +85,15 @@ class _HomeGridViewState extends State<HomeGridView> {
                                 imageUrl: baseHttp + _games[index].imageUrl!,
                                 width: sizeWidth,
                                 fit: BoxFit.fill,
-                                placeholder: (context, url) => Image.asset(
+                                errorWidget: (context, url, error) =>
+                                    Image.asset(
                                   ImagesGameLovers.imageGeral,
                                   fit: BoxFit.fill,
                                   width: sizeWidth,
                                 ),
+                                placeholder: (context, url) =>
+                                    const CircularProgressIndicator(),
                               ),
-                              // Image.network(
-                              //   baseHttp + _games[index].imageUrl!,
-                              //   errorBuilder: (BuildContext context,
-                              //       Object exception, StackTrace? stackTrace) {
-                              //     return Image.asset(
-                              //       ImagesGameLovers.imageGeral,
-                              //       fit: BoxFit.fill,
-                              //       width: MediaQuery.of(context).size.width,
-                              //     );
-                              //   },
-                              //   fit: BoxFit.fill,
-                              //   height: sizeHeight,
-                              // ),
                               Column(
                                 mainAxisAlignment: MainAxisAlignment.end,
                                 children: [

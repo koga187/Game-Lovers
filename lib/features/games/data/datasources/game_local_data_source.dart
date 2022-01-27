@@ -41,7 +41,7 @@ class GameLocalDataSource extends DatabaseAccessor<GamesDatabase>
           }
         }
 
-        for (final platform in game.platform!) {
+        for (final platform in game.platform) {
           await into(platformTable).insert(
             PlatformTableCompanion.insert(
               gameId: game.id,
