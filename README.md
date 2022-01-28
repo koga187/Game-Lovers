@@ -60,3 +60,6 @@ A arquitetura do projeto é baseada na arquitetura limpa, para conhecer mais sob
 - [drift](https://pub.dev/packages/drift): persistência de dados [(documentação)](https://drift.simonbinder.eu/docs/).
 
 - [dio](https://pub.dev/packages/dio): requisições HTTP.
+
+
+[Screenchots](https://github.com/Claraalmeida09/Game-Lovers/tree/main/assets/screenshots)
