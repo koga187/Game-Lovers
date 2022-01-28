@@ -39,18 +39,19 @@ Para mais instruções de como executar o projeto em outros sistemas operacionai
 
 Contém duas interfaces simples:
 
+ 
+
 - 1. Em que o usuário filtra a lista de jogos (formato `GridView`) pela plataforma desejada através de uma `tab`.
 - 2. Ao clicar em um jogo recebe uma tela com os detalhes do jogo em questão.
 - 3. A aplicação conta ainda com uma versão dark mode ao clicar na logo do app na região superior direita.
 
-   <p align="center">
-   <img align="right" src="https://j.gifs.com/6WKXjV.gif" height="300">
-
-   </p>
+  
 
 ## Tecnologias Utilizadas
 
 A arquitetura do projeto é baseada na arquitetura limpa, para conhecer mais sobre esta estrutura, clique [aqui](https://resocoder.com/2019/08/27/flutter-tdd-clean-architecture-course-1-explanation-project-structure/).
+
+   
 
 - [flutter_bloc](https://pub.dev/packages/flutter_bloc): gerenciador de estado flutter.
 
