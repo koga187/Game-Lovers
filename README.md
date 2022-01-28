@@ -62,4 +62,4 @@ A arquitetura do projeto é baseada na arquitetura limpa, para conhecer mais sob
 - [dio](https://pub.dev/packages/dio): requisições HTTP.
 
 
-[Screenchots](https://github.com/Claraalmeida09/Game-Lovers/tree/main/assets/screenshots)
+[Screenshots](https://github.com/Claraalmeida09/Game-Lovers/tree/main/assets/screenshots)
