@@ -121,4 +121,4 @@ Pq instanciou 5x o mesmo bloc na home page, para o controle das abas?
 
 api_config poderia ser um enum.
 
-Legal as abstrações de erro use case
+Legal as abstrações de erro e use case
