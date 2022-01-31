@@ -82,6 +82,8 @@ A arquitetura do projeto é baseada na arquitetura limpa, para conhecer mais sob
 
 - [x] Para gerenciamento de estado, BLOC.
 
+- [x] Dark/Light theme.
+
 - [x] Para injeção de dependencias ChangeNotifier (Provider).
 
 - [x] Adicionar teste unitário.
@@ -90,11 +92,33 @@ A arquitetura do projeto é baseada na arquitetura limpa, para conhecer mais sob
 
 - [x] ORM MOOR/DRIFT.
 
-- [x] Teste de widget.
+- [x] Teste de widget/bloc.
 
-- [x] Teste de integração.
+- [ ] Teste de integração.
 
 - [x] Usar os temas com o darkMode.
 
 - [x] Utilizar principios do SOLID.
 
+## Cobertura de código:
+
+ - [x] - core (network_info_test.dart)
+ - [x] - gateways/datasources (game_remote_data_source_test.dart)
+ - [x] - repositories
+ - [ ] - usecases
+ - [x] - blocs
+ - [ ] - pages
+ - [ ] - widgets
+
+![Cobertura de código](assets/images/coverage.png)
+
+
+## Observações:
+
+Gostei do fixture para pegar o retorno mockado da api!
+
+Pq instanciou 5x o mesmo bloc na home page, para o controle das abas?
+
+api_config poderia ser um enum.
+
+Legal as abstrações de erro use case
