@@ -63,3 +63,38 @@ A arquitetura do projeto é baseada na arquitetura limpa, para conhecer mais sob
 
 
 [Screenshots](https://github.com/Claraalmeida09/Game-Lovers/tree/main/assets/screenshots)
+
+## Revisão Koga:
+
+# 1 - Basico
+
+ - [x] Crie o repositório no BitBucket, GitHub or GitLab;
+
+ - [x] Adicione imagens do app numa pasta no projeto chamada "screenshots" (README);
+
+ - [x] Inclua um arquivo README com as instruções para build do projeto;
+
+ - [x] Uma vez que tiver terminado o trabalho, me envie o link do repositório, com acesso de leitura.
+
+# 2 - Libs obrigatórias:
+
+- [x] Para esse projeto vamos utilizar a linguagem flutter/dart.
+
+- [x] Para gerenciamento de estado, BLOC.
+
+- [x] Para injeção de dependencias ChangeNotifier (Provider).
+
+- [x] Adicionar teste unitário.
+
+# 3 - Diferenciais
+
+- [x] ORM MOOR/DRIFT.
+
+- [x] Teste de widget.
+
+- [x] Teste de integração.
+
+- [x] Usar os temas com o darkMode.
+
+- [x] Utilizar principios do SOLID.
+
